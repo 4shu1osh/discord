@@ -45,7 +45,6 @@ export default function Login({navigation}) {
           <Text style={styles.heading}>{'Welcome Back!'}</Text>
           <Text style={styles.text}>{'We are so excited to see you again'}</Text>
           <Text style={[styles.text, {color: COLORS.PRIMARY.RED}]}>{err}</Text>
-
           <CustomTextInput setFn={setUser} label={'Email or Phone Number'} secureTextEntryValue={false}/>
           <CustomTextInput setFn={setPass} label={'Password'} secureTextEntryValue={true} />
         </View>
