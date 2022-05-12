@@ -8,7 +8,7 @@ const COLORS = {
       FUSCHIA: '#EB459E',
       BLURPLE: '#5764F2',
       GREYPLE: '#99AAB5',
-      NOT_QUITE_BLACK: '#23272A',
+      NOT_QUITE_BLACK: '#212226',
       DARK_BUT_NOT_BLACK: '#36393F',
     },
     PRIMARY: {
@@ -29,7 +29,7 @@ const COLORS = {
       DARK_BLUE: '#206694',
       DARK_GOLD: '#C27C0E',
       DARK_GREEN: '#1F8B4C',
-      LIGHT_GREY: '#BCC0C0',
+      LIGHT_GREY: '#e0dbd1',
       DARK_ORANGE: '#A84300',
       DARKER_GREY: '#7F8C8D',
       DARK_PURPLE: '#71368A',
