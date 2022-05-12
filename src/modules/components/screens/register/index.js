@@ -5,13 +5,26 @@ import {View, Text, SafeAreaView, Image, TouchableOpacity} from 'react-native';
 import COLORS from '../../../../utils/colors';
 import CustomGeneralButton from '../../custom/customGeneralButton';
 import auth from '@react-native-firebase/auth';
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import CustomSocialButton from '../../custom/socialBtn';
 
 const onPressLogin = () => {
   alert('Hello');
 };
+GoogleSignin.configure({
+  webClientId:
+    '645700229771-mum9dmsc0hivp4hmc8bueuravnsnv9hq.apps.googleusercontent.com',
+});
+async function onGoogleButtonPress() {
+  // Get the users ID token
+  const {idToken} = await GoogleSignin.signIn();
 
+  // Create a Google credential with the token
+  const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+
+  // Sign-in the user with the credential
+  return auth().signInWithCredential(googleCredential);
+}
 export default function Register({navigation}) {
   return (
     <SafeAreaView style={{flex: 1}}>
@@ -41,9 +54,23 @@ export default function Register({navigation}) {
         </TouchableOpacity>
         <Text style={[styles.text, {marginTop: 20}]}>{'Or sign up with'}</Text>
         <View style={styles.rowStyle}>
-        <CustomSocialButton source={require('../../../../assets/photos/google.png')}/>
-        <CustomSocialButton source={require('../../../../assets/photos/fb.png')}/>
-         <CustomSocialButton source={require('../../../../assets/photos/twitter.png')}/>
+          <TouchableOpacity
+            onPress={() =>
+              onGoogleButtonPress().then(() =>
+                console.log('Signed in with Google!'),
+              )
+            }>
+            <CustomSocialButton
+              source={require('../../../../assets/photos/google.png')}
+            />
+            {/* <Text>ashutosh</Text> */}
+          </TouchableOpacity>
+          <CustomSocialButton
+            source={require('../../../../assets/photos/fb.png')}
+          />
+          <CustomSocialButton
+            source={require('../../../../assets/photos/twitter.png')}
+          />
         </View>
       </View>
     </SafeAreaView>
