@@ -14,10 +14,11 @@ export default function Login({navigation}) {
   const onPressLogin = () => {
 
     auth()
-    .createUserWithEmailAndPassword(user, pass)
+    .signInWithEmailAndPassword(user, pass)
     .then(() => {
-      console.log('User account created & signed in!', user, pass);
+      console.log('signed in!', user, pass);
       setErr('')
+      navigation.navigate('Home')
     })
     .catch(error => {
       if (error.code === 'auth/email-already-in-use') {

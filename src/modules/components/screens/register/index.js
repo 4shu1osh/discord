@@ -7,10 +7,40 @@ import CustomGeneralButton from '../../custom/customGeneralButton';
 import auth from '@react-native-firebase/auth';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import CustomSocialButton from '../../custom/socialBtn';
+import {LoginManager, AccessToken} from 'react-native-fbsdk-next';
+import ChatScreen from '../chatScreen';
 
 const onPressLogin = () => {
   alert('Hello');
 };
+async function onFacebookButtonPress() {
+  LoginManager.logOut();
+  // Attempt login with permissions
+  const result = await LoginManager.logInWithPermissions([
+    'public_profile',
+    'email',
+  ]).then(console.log('results stored'));
+  console.log('result', result);
+  if (result.isCancelled) {
+    throw 'User cancelled the login process';
+  }
+
+  // Once signed in, get the users AccesToken
+  const data = await AccessToken.getCurrentAccessToken();
+
+  if (!data) {
+    throw 'Something went wrong obtaining access token';
+  }
+
+  // Create a Firebase credential with the AccessToken
+  const facebookCredential = auth.FacebookAuthProvider.credential(
+    data.accessToken,
+  );
+
+  // Sign-in the user with the credential
+  return auth().signInWithCredential(facebookCredential);
+}
+
 GoogleSignin.configure({
   webClientId:
     '645700229771-mum9dmsc0hivp4hmc8bueuravnsnv9hq.apps.googleusercontent.com',
@@ -56,18 +86,22 @@ export default function Register({navigation}) {
         <View style={styles.rowStyle}>
           <TouchableOpacity
             onPress={() =>
-              onGoogleButtonPress().then(() =>
-                console.log('Signed in with Google!'),
-              )
+              onGoogleButtonPress().then(() => {
+                navigation.navigate('ChatScreen');
+                console.log('Signed in with Google!');
+              })
             }>
             <CustomSocialButton
               source={require('../../../../assets/photos/google.png')}
             />
             {/* <Text>ashutosh</Text> */}
           </TouchableOpacity>
-          <CustomSocialButton
-            source={require('../../../../assets/photos/fb.png')}
-          />
+          <TouchableOpacity onPress={onFacebookButtonPress}>
+            <CustomSocialButton
+              source={require('../../../../assets/photos/fb.png')}
+            />
+          </TouchableOpacity>
+
           <CustomSocialButton
             source={require('../../../../assets/photos/twitter.png')}
           />
