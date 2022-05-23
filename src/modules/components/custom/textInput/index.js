@@ -16,6 +16,9 @@ export default function CustomTextInput({setFn, label, secureTextEntryValue}) {
       placeholderTextColor={COLORS.PRIMARY.LIGHT_GREY}
       secureTextEntry={secureTextEntryValue}
       onChangeText={onChangeText}
+      autoCapitalize= 'none'
+      autoComplete='off'
+      autoCorrect= {false}
       theme={{
         dark:true,
         colors: {

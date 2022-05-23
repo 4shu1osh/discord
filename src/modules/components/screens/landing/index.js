@@ -13,6 +13,7 @@ export default function LandingPage({navigation}) {
           style={styles.backgroundImg}
         />
         <CustomButton navigation={navigation} backgroundColor={COLORS.MAIN_PALETTE.BLURPLE} name={"Login"} />
+        <CustomButton navigation={navigation} backgroundColor={COLORS.MAIN_PALETTE.GREYPLE} name={"Login With Phone Number"} />
         <CustomButton navigation={navigation} backgroundColor={COLORS.PRIMARY.GREY} name={"Register"} />
       </View>
     </SafeAreaView>

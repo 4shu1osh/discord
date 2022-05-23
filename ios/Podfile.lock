@@ -1052,6 +1052,9 @@ PODS:
     - RCTTypeSafety
     - React
     - ReactCommon/turbomodule/core
+  - react-native-twitter-signin (1.2.0):
+    - React
+    - TwitterKit5
   - React-perflogger (0.68.2)
   - React-RCTActionSheet (0.68.2):
     - React-Core/RCTActionSheetHeaders (= 0.68.2)
@@ -1138,9 +1141,18 @@ PODS:
   - RNScreens (3.13.1):
     - React-Core
     - React-RCTImage
+  - RNSentry (3.4.2):
+    - React-Core
+    - Sentry (= 7.11.0)
   - RNVectorIcons (9.1.0):
     - React-Core
+  - Sentry (7.11.0):
+    - Sentry/Core (= 7.11.0)
+  - Sentry/Core (7.11.0)
   - SocketRocket (0.6.0)
+  - TwitterCore (3.2.0)
+  - TwitterKit5 (5.2.0):
+    - TwitterCore (>= 3.1.0)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
     - Yoga (~> 1.14)
@@ -1190,6 +1202,7 @@ DEPENDENCIES:
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - react-native-fbsdk-next (from `../node_modules/react-native-fbsdk-next`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
+  - "react-native-twitter-signin (from `../node_modules/@react-native-twitter-signin/twitter-signin`)"
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
@@ -1209,6 +1222,7 @@ DEPENDENCIES:
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - "RNGoogleSignin (from `../node_modules/@react-native-google-signin/google-signin`)"
   - RNScreens (from `../node_modules/react-native-screens`)
+  - "RNSentry (from `../node_modules/@sentry/react-native`)"
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
@@ -1252,7 +1266,10 @@ SPEC REPOS:
     - nanopb
     - OpenSSL-Universal
     - PromisesObjC
+    - Sentry
     - SocketRocket
+    - TwitterCore
+    - TwitterKit5
     - YogaKit
 
 EXTERNAL SOURCES:
@@ -1296,6 +1313,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-fbsdk-next"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
+  react-native-twitter-signin:
+    :path: "../node_modules/@react-native-twitter-signin/twitter-signin"
   React-perflogger:
     :path: "../node_modules/react-native/ReactCommon/reactperflogger"
   React-RCTActionSheet:
@@ -1334,6 +1353,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-google-signin/google-signin"
   RNScreens:
     :path: "../node_modules/react-native-screens"
+  RNSentry:
+    :path: "../node_modules/@sentry/react-native"
   RNVectorIcons:
     :path: "../node_modules/react-native-vector-icons"
   Yoga:
@@ -1398,6 +1419,7 @@ SPEC CHECKSUMS:
   React-logger: a0833912d93b36b791b7a521672d8ee89107aff1
   react-native-fbsdk-next: 7ab4f307b4c07de8f2f669659b70ff703eb841bd
   react-native-safe-area-context: ebf8c413eb8b5f7c392a036a315eb7b46b96845f
+  react-native-twitter-signin: 423e8d20eb26fddc14852d3f1435a8b39358f49d
   React-perflogger: a18b4f0bd933b8b24ecf9f3c54f9bf65180f3fe6
   React-RCTActionSheet: 547fe42fdb4b6089598d79f8e1d855d7c23e2162
   React-RCTAnimation: bc9440a1c37b06ae9ebbb532d244f607805c6034
@@ -1417,8 +1439,12 @@ SPEC CHECKSUMS:
   RNGestureHandler: 61628a2c859172551aa2100d3e73d1e57878392f
   RNGoogleSignin: d7f8368b82d94f1dec964785d496387ca7f19092
   RNScreens: 40a2cb40a02a609938137a1e0acfbf8fc9eebf19
+  RNSentry: 2cd1daa124b0d9fd0dfc2cb6094fdd168cb579bc
   RNVectorIcons: 7923e585eaeb139b9f4531d25a125a1500162a0b
+  Sentry: 0c5cd63d714187b4a39c331c1f0eb04ba7868341
   SocketRocket: fccef3f9c5cedea1353a9ef6ada904fde10d6608
+  TwitterCore: 8cbc9ad34d91c63a0035ea05bfbfc0d7ca72a28c
+  TwitterKit5: 64095dfefcf39be2355711ef27112d55e340d90e
   Yoga: 99652481fcd320aefa4a7ef90095b95acd181952
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 

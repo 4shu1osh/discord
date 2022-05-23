@@ -1,4 +1,5 @@
 #import <Firebase.h>
+#import <TwitterKit/TWTRKit.h>
 #import "AppDelegate.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <React/RCTBridge.h>
@@ -27,6 +28,9 @@
 #endif
 
 @implementation AppDelegate
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options {
+  return [[Twitter sharedInstance] application:app openURL:url options:options];
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -58,6 +62,7 @@
   [self.window makeKeyAndVisible];
   [[FBSDKApplicationDelegate sharedInstance] application:application
                              didFinishLaunchingWithOptions:launchOptions];
+  [[Twitter sharedInstance] startWithConsumerKey:@"ApdafLLPINlv5HR79PGoNmege" consumerSecret:@"hDHOYKeqOPQhwj0IJ1dkPLTOXq90TeC03IicdWTebwvvn3syH8"];
   return YES;
 }
 

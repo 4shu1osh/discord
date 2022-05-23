@@ -18,15 +18,21 @@ const styles = StyleSheet.create({
   },
   heading: {
       fontSize: 26,
-      fontWeight: 'bold',
       marginVertical: 8,
+      fontWeight: 'bold',
       color: COLORS.MAIN_PALETTE.WHITE
   },
   text: {
     fontSize: 14,
     marginVertical: 6,
     color: COLORS.PRIMARY.LIGHT_GREY
-}
+},
+rowStyle: {
+  marginVertical: 20,
+  alignItems: 'center',
+  flexDirection: 'row',
+  justifyContent: 'center',
+},
 });
 
 export default styles;

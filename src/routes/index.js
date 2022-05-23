@@ -14,6 +14,8 @@ import Mentions from '../modules/components/screens/mentions';
 import Profile from '../modules/components/screens/profile';
 import { Image } from 'react-native';
 import ChatScreen from '../modules/components/screens/chatScreen';
+import LogInWithPhoneNumber from '../modules/components/screens/login/logInWithPhoneNumber';
+
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -27,6 +29,7 @@ export default function Routes() {
         }}>
         <Stack.Screen name="LandingPage" component={LandingPage} />
         <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Login With Phone Number" component={LogInWithPhoneNumber} />
         <Stack.Screen name="Register" component={Register} />
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="FeedStack" component={FeedStack} />

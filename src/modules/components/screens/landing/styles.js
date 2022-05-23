@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   backgroundImg: {
-    height: height * 0.70,
+    height: height * 0.60,
     resizeMode: 'contain',
     marginBottom: 20
   },
