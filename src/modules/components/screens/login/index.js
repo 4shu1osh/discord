@@ -15,45 +15,44 @@ export default function Login({navigation}) {
 
   const onPressGoogleSignIn = () => {
     CommonFunction.logInWithGoogle(
-      ()=> {
-        console.log("Signed in Google")
-        navigation.navigate("Home")
+      () => {
+        console.log('Signed in Google');
+        navigation.navigate('Home');
       },
       error => {
-        console.log("error google sign in")
-      }
-    )
-  }
+        console.log('error google sign in');
+      },
+    );
+  };
 
   const onPressTwitterSignIn = () => {
-
-RNTwitterSignIn.init(
-  'ApdafLLPINlv5HR79PGoNmege',
-  'hDHOYKeqOPQhwj0IJ1dkPLTOXq90TeC03IicdWTebwvvn3syH8',
-).then(() => console.log('Twitter SDK initialized'));
+    RNTwitterSignIn.init(
+      'ApdafLLPINlv5HR79PGoNmege',
+      'hDHOYKeqOPQhwj0IJ1dkPLTOXq90TeC03IicdWTebwvvn3syH8',
+    ).then(() => console.log('Twitter SDK initialized'));
 
     CommonFunction.logInWithTwitter(
-      data=> {
-        console.log("Signed in Twitter", data)
-        navigation.navigate("Home")
+      data => {
+        console.log('Signed in Twitter', data);
+        navigation.navigate('Home');
       },
       error => {
-        console.log("error twitter sign in", error)
-      }
-    )
-  }
+        console.log('error twitter sign in', error);
+      },
+    );
+  };
 
   const onPressFacebookSignIn = () => {
     CommonFunction.logInWithFacebook(
-      userDetails=> {
-        console.log("Signed in Facebook", userDetails)
-        navigation.navigate("Home")
+      userDetails => {
+        console.log('Signed in Facebook', userDetails);
+        navigation.navigate('Home');
       },
       error => {
-        console.log("error google sign in")
-      }
-    )
-  }
+        console.log('error google sign in');
+      },
+    );
+  };
 
   const onPressLogin = () => {
     CommonFunction.logInWithEmailAndPassword(
@@ -120,8 +119,7 @@ RNTwitterSignIn.init(
         </TouchableOpacity>
         <Text style={[styles.text, {alignSelf: 'center'}]}>OR</Text>
         <View style={styles.rowStyle}>
-          <TouchableOpacity
-            onPress={onPressGoogleSignIn}>
+          <TouchableOpacity onPress={onPressGoogleSignIn}>
             <CustomSocialButton
               source={require('../../../../assets/photos/google.png')}
             />
@@ -148,17 +146,3 @@ RNTwitterSignIn.init(
     </SafeAreaView>
   );
 }
-/*
-  const logInWithPhoneNumber = () => {
-    CommonFunction.logInWithPhoneNumber(
-    phone,
-    userDetails => {
-      console.log(first)
-    },
-    loginError => {
-      setErr(loginError)
-    }
-    )
-
-  } 
-*/

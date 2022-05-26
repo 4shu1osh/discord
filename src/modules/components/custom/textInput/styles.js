@@ -8,12 +8,16 @@ const styles = StyleSheet.create({
         height: height*0.07,
         borderRadius: 6,
         width: width*0.90,
-        marginVertical: 8,
+        marginVertical: 6,
     },
     label: {
         color: COLORS.MAIN_PALETTE.WHITE,
         fontSize: 14,
         fontWeight: 'bold'
+    },
+    errMsg: {
+        alignSelf: 'flex-end',
+        color: COLORS.PRIMARY.RED
     }
 })
 

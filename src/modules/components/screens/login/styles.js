@@ -17,22 +17,22 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   heading: {
-      fontSize: 26,
-      marginVertical: 8,
-      fontWeight: 'bold',
-      color: COLORS.MAIN_PALETTE.WHITE
+    fontSize: 26,
+    marginVertical: 8,
+    fontWeight: 'bold',
+    color: COLORS.MAIN_PALETTE.WHITE,
   },
   text: {
     fontSize: 14,
     marginVertical: 6,
-    color: COLORS.PRIMARY.LIGHT_GREY
-},
-rowStyle: {
-  marginVertical: 20,
-  alignItems: 'center',
-  flexDirection: 'row',
-  justifyContent: 'center',
-},
+    color: COLORS.PRIMARY.LIGHT_GREY,
+  },
+  rowStyle: {
+    marginVertical: 20,
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
 });
 
 export default styles;

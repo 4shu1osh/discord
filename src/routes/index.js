@@ -17,6 +17,7 @@ import ChatScreen from '../modules/components/screens/chatScreen';
 import LogInWithPhoneNumber from '../modules/components/screens/login/logInWithPhoneNumber';
 
 
+
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 

@@ -4,21 +4,44 @@ import CustomTextInput from '../../custom/textInput';
 import {View, Text, SafeAreaView, Image, TouchableOpacity} from 'react-native';
 import COLORS from '../../../../utils/colors';
 import CustomGeneralButton from '../../custom/customGeneralButton';
-import auth from '@react-native-firebase/auth';
-import CustomSocialButton from '../../custom/socialBtn';
-import ChatScreen from '../chatScreen';
 import CommonFunction from '../../../../utils/CommonFunction';
+import {Formik} from 'formik';
+import * as Yup from 'yup';
+
+const validationSchema = Yup.object({
+  fullName: Yup.string()
+    .trim()
+    .min(3, 'Name is too short!')
+    .required('Name is required!'),
+  phoneNumber: Yup.number('must be numeric value')
+    .min(1000000000, 'Phone no. must be 10 digits')
+    .max(9999999999, 'Phone no. must be 10 digits'),
+  email: Yup.string().email('Invalid email!').required('Email is required!'),
+  password: Yup.string()
+    .trim()
+    .min(8, 'Password is too short!')
+    .required('Password is required!'),
+  confirmPassword: Yup.string().equals(
+    [Yup.ref('password'), null],
+    'Password does not match!',
+  ),
+});
+
+const userInfo = {
+  fullName: '',
+  email: '',
+  phoneNumber: '',
+  password: '',
+  confirmPassword: '',
+};
 
 export default function Register({navigation}) {
-  const [email, setEmail] = useState('');
-  const [pass, setPass] = useState('');
-  const [repass, setRepass] = useState('');
   const [err, setErr] = useState('');
 
-  const onPressSignUp = () => {
+  const onPressSignUp = (email, password) => {
     CommonFunction.signUpWithEmailAndPassword(
       email,
-      pass,
+      password,
       userDetails => {
         console.log('user-------', userDetails);
         setErr('');
@@ -41,34 +64,79 @@ export default function Register({navigation}) {
         <View style={styles.alignCenter}>
           <Text style={styles.heading}>{'Enter Details'}</Text>
           <Text style={[styles.text, {color: COLORS.PRIMARY.RED}]}>{err}</Text>
-          <CustomTextInput
-            label={'Email'}
-            secureTextEntryValue={false}
-            setFn={setEmail}
-          />
-          <CustomTextInput
-            label={'Password'}
-            secureTextEntryValue={true}
-            setFn={setPass}
-          />
-          <CustomTextInput
-            label={'Re-enter password'}
-            secureTextEntryValue={true}
-            setFn={setRepass}
-          />
+          <Formik initialValues={userInfo} validationSchema={validationSchema}>
+            {({
+              values,
+              errors,
+              touched,
+              handleChange,
+              handleBlur,
+              handleSubmit,
+            }) => {
+              const {fullName, email, password, phoneNumber, confirmPassword} =
+                values;
+              return (
+                <>
+                  <CustomTextInput
+                    value={fullName}
+                    label={'Full Name'}
+                    error={touched.fullName && errors.fullName}
+                    onChangeText={handleChange('fullName')}
+                    onBlur={handleBlur('fullName')}
+                  />
+                  <CustomTextInput
+                    value={phoneNumber}
+                    label={'Phone Number'}
+                    error={touched.phoneNumber && errors.phoneNumber}
+                    onBlur={handleBlur('phoneNumber')}
+                    onChangeText={handleChange('phoneNumber')}
+                    d
+                  />
+                  <CustomTextInput
+                    value={email}
+                    label={'Email'}
+                    error={touched.email && errors.email}
+                    onBlur={handleBlur('email')}
+                    onChangeText={handleChange('email')}
+                  />
+                  <CustomTextInput
+                    value={password}
+                    label={'Password'}
+                    error={touched.password && errors.password}
+                    onBlur={handleBlur('password')}
+                    onChangeText={handleChange('password')}
+                    secureTextEntry={true}
+                  />
+                  <CustomTextInput
+                    value={confirmPassword}
+                    label={'Re-enter password'}
+                    error={touched.confirmPassword && errors.confirmPassword}
+                    onBlur={handleBlur('confirmPassword')}
+                    onChangeText={handleChange('confirmPassword')}
+                    secureTextEntry={true}
+                  />
+                  {password != confirmPassword ? (
+                    <CustomGeneralButton
+                      name="Register"
+                      backgroundColor={COLORS.PRIMARY.DARK_GREY}
+                    />
+                  ) : (
+                    <TouchableOpacity
+                      onPress={() => onPressSignUp(email, password)}>
+                      <CustomGeneralButton
+                        name="Register"
+                        backgroundColor={COLORS.MAIN_PALETTE.BLURPLE}
+                      />
+                    </TouchableOpacity>
+                  )}
+                </>
+              );
+            }}
+          </Formik>
         </View>
         <Text style={[styles.text, {color: COLORS.PRIMARY.BLUE}]}>
           {'View our privacy policy'}
         </Text>
-
-        <TouchableOpacity onPress={onPressSignUp}>
-          <CustomGeneralButton
-            name="Register"
-            backgroundColor={COLORS.MAIN_PALETTE.BLURPLE}
-          />
-        </TouchableOpacity>
-        <Text style={[styles.text, {marginTop: 20}]}>{'Or sign up with'}</Text>
-        
       </View>
     </SafeAreaView>
   );

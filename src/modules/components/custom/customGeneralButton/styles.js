@@ -6,11 +6,10 @@ const styles = StyleSheet.create({
   button: {
     height: 40,
     borderRadius: 6,
-    marginVertical: 4,
     width: width * 0.9,
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 10,
+    marginVertical: 20,
   },
   label: {
     color: COLORS.MAIN_PALETTE.WHITE,

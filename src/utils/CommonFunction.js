@@ -4,29 +4,32 @@ import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {NativeModules} from 'react-native';
 const {RNTwitterSignIn} = NativeModules;
 
-
 /**
  * @function logInWithTwitter
  * @description Log in via twitter
- * @param {*} successCallback 
- * @param {*} failureCallback 
+ * @param {*} successCallback
+ * @param {*} failureCallback
  */
 async function logInWithTwitter(successCallback, failureCallback) {
   try {
     const {authToken, authTokenSecret} = await RNTwitterSignIn.logIn();
-    console.log(authToken)
-    const twitterCredential = Auth.TwitterAuthProvider.credential(authToken, authTokenSecret);
-    Auth().signInWithCredential(twitterCredential)
-    .then(data=> {
-    console.log('helllooooo');
-    console.log("daat", data)
-  })
-  .catch((err)=> {
-    console.log("helloo errr", err)
-  })
-} catch (error) {
-  console.log(error)
-}
+    console.log(authToken);
+    const twitterCredential = Auth.TwitterAuthProvider.credential(
+      authToken,
+      authTokenSecret,
+    );
+    Auth()
+      .signInWithCredential(twitterCredential)
+      .then(data => {
+        console.log('helllooooo');
+        console.log('daat', data);
+      })
+      .catch(err => {
+        console.log('helloo errr', err);
+      });
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 GoogleSignin.configure({
@@ -34,12 +37,11 @@ GoogleSignin.configure({
     '645700229771-mum9dmsc0hivp4hmc8bueuravnsnv9hq.apps.googleusercontent.com',
 });
 
-
 /**
  * @function logInWithGoogle
  * @description Log in via Google
- * @param {*} successCallback 
- * @param {*} failureCallback 
+ * @param {*} successCallback
+ * @param {*} failureCallback
  */
 async function logInWithGoogle(successCallback, failureCallback) {
   const {idToken} = await GoogleSignin.signIn();
@@ -56,8 +58,8 @@ async function logInWithGoogle(successCallback, failureCallback) {
 /**
  * @function logInWithFacebook
  * @description Log in via Facebook
- * @param {*} successCallback 
- * @param {*} failureCallback 
+ * @param {*} successCallback
+ * @param {*} failureCallback
  */
 async function logInWithFacebook(successCallback, failureCallback) {
   LoginManager.logOut();
@@ -82,9 +84,9 @@ async function logInWithFacebook(successCallback, failureCallback) {
 /**
  * @function logInWithPhoneNumber
  * @description Log in via phone number
- * @param {*} phone 
- * @param {*} successCallback 
- * @param {*} failureCallback 
+ * @param {*} phone
+ * @param {*} successCallback
+ * @param {*} failureCallback
  */
 
 function logInWithPhoneNumber(phone, successCallback, failureCallback) {
@@ -114,8 +116,8 @@ function confirmCode(code, confirm, successCallback, failureCallback) {
  * @description Log in via email and link
  * @param {*} email
  * @param {*} emailLink
- * @param {*} successCallback 
- * @param {*} failureCallback 
+ * @param {*} successCallback
+ * @param {*} failureCallback
  */
 
 function logInWithEmailAndLink(
@@ -137,8 +139,8 @@ function logInWithEmailAndLink(
 /**
  * @function logInAnonymously
  * @description Log in anonymously
- * @param {*} successCallback 
- * @param {*} failureCallback 
+ * @param {*} successCallback
+ * @param {*} failureCallback
  */
 
 function logInAnonymously(successCallback, failureCallback) {
@@ -159,10 +161,9 @@ function logInAnonymously(successCallback, failureCallback) {
  * @description Log in via email and Password
  * @param {*} email
  * @param {*} password
- * @param {*} successCallback 
- * @param {*} failureCallback 
+ * @param {*} successCallback
+ * @param {*} failureCallback
  */
-
 
 function logInWithEmailAndPassword(
   email,
@@ -184,8 +185,8 @@ function logInWithEmailAndPassword(
  * @description Sign up via email and Password
  * @param {*} email
  * @param {*} password
- * @param {*} successCallback 
- * @param {*} failureCallback 
+ * @param {*} successCallback
+ * @param {*} failureCallback
  */
 const signUpWithEmailAndPassword = (
   email,
@@ -205,8 +206,8 @@ const signUpWithEmailAndPassword = (
 /**
  * @function logoutWithFirebase
  * @description Log out with firebase
- * @param {*} successCallback 
- * @param {*} failureCallback 
+ * @param {*} successCallback
+ * @param {*} failureCallback
  */
 const logoutWithFirebase = (successCallback, failureCallback) => {
   Auth()
@@ -220,8 +221,8 @@ const logoutWithFirebase = (successCallback, failureCallback) => {
 /**
  * @function authErrorHandling
  * @description Error handling for log in and sign up methods
- * @param {*} errorMsg 
- * @returns 
+ * @param {*} errorMsg
+ * @returns
  */
 const authErrorHandling = errorMsg => {
   switch (errorMsg) {
