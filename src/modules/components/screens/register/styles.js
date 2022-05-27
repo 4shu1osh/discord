@@ -1,6 +1,6 @@
-import {Dimensions, StyleSheet} from 'react-native';
 import COLORS from '../../../../utils/colors';
 const {height, width} = Dimensions.get('screen');
+import {Dimensions, StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -28,10 +28,23 @@ const styles = StyleSheet.create({
     color: COLORS.PRIMARY.LIGHT_GREY,
   },
   rowStyle: {
-    flexDirection: 'row',
     marginVertical: 20,
     alignItems: 'center',
+    flexDirection: 'row',
     justifyContent: 'center',
+  },
+  button: {
+    height: 40,
+    borderRadius: 6,
+    marginVertical: 18,
+    width: width * 0.9,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  label: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: COLORS.MAIN_PALETTE.WHITE,
   },
 });
 

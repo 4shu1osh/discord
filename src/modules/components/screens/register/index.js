@@ -1,19 +1,22 @@
-import React, {useState} from 'react';
-import styles from './styles';
-import CustomTextInput from '../../custom/textInput';
-import {View, Text, SafeAreaView, Image, TouchableOpacity} from 'react-native';
-import COLORS from '../../../../utils/colors';
-import CustomGeneralButton from '../../custom/customGeneralButton';
-import CommonFunction from '../../../../utils/CommonFunction';
-import {Formik} from 'formik';
 import * as Yup from 'yup';
+import styles from './styles';
+import {Formik} from 'formik';
+import React, {useState} from 'react';
+import COLORS from '../../../../utils/colors';
+import CustomTextInput from '../../custom/textInput';
+import {View, Text, SafeAreaView} from 'react-native';
+import TouchableImage from '../../custom/touchableImage';
+import CommonFunction from '../../../../utils/CommonFunction';
+import CustomGeneralButton from '../../custom/customGeneralButton';
+
+/**
+ * @function validationSchema
+ * @description Validation of User info input
+ */
 
 const validationSchema = Yup.object({
-  fullName: Yup.string()
-    .trim()
-    .min(3, 'Name is too short!')
-    .required('Name is required!'),
-  phoneNumber: Yup.number('must be numeric value')
+  fullName: Yup.string().trim().min(3, 'Name is too short!'),
+  phoneNumber: Yup.number()
     .min(1000000000, 'Phone no. must be 10 digits')
     .max(9999999999, 'Phone no. must be 10 digits'),
   email: Yup.string().email('Invalid email!').required('Email is required!'),
@@ -21,19 +24,25 @@ const validationSchema = Yup.object({
     .trim()
     .min(8, 'Password is too short!')
     .required('Password is required!'),
-  confirmPassword: Yup.string().equals(
-    [Yup.ref('password'), null],
-    'Password does not match!',
-  ),
+  confirmPassword: Yup.string()
+    .min(8)
+    .equals([Yup.ref('password'), null], 'Password does not match!'),
 });
 
 const userInfo = {
-  fullName: '',
   email: '',
-  phoneNumber: '',
+  fullName: '',
   password: '',
+  phoneNumber: '',
   confirmPassword: '',
 };
+
+/**
+ * @function Register
+ * @description Calls the sign up method with 4 params 
+ * - email, password, successCallback and failureCallback
+ * @param {*} naviagtion
+ */
 
 export default function Register({navigation}) {
   const [err, setErr] = useState('');
@@ -43,8 +52,8 @@ export default function Register({navigation}) {
       email,
       password,
       userDetails => {
-        console.log('user-------', userDetails);
         setErr('');
+        navigation.navigate('Home');
       },
       signUpError => {
         setErr(signUpError);
@@ -55,88 +64,69 @@ export default function Register({navigation}) {
   return (
     <SafeAreaView style={{flex: 1}}>
       <View style={styles.container}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Image
-            source={require('../../../../assets/photos/left-arrow.png')}
-            style={styles.backButton}
-          />
-        </TouchableOpacity>
+        <TouchableImage
+          style={styles.backButton}
+          onPress={() => navigation.goBack()}
+          source={require('../../../../assets/photos/left-arrow.png')}
+        />
         <View style={styles.alignCenter}>
           <Text style={styles.heading}>{'Enter Details'}</Text>
           <Text style={[styles.text, {color: COLORS.PRIMARY.RED}]}>{err}</Text>
           <Formik initialValues={userInfo} validationSchema={validationSchema}>
-            {({
-              values,
-              errors,
-              touched,
-              handleChange,
-              handleBlur,
-              handleSubmit,
-            }) => {
+            {({values, errors, touched, handleChange, handleBlur}) => {
               const {fullName, email, password, phoneNumber, confirmPassword} =
                 values;
               return (
                 <>
                   <CustomTextInput
                     value={fullName}
-                    label={'Full Name'}
-                    error={touched.fullName && errors.fullName}
-                    onChangeText={handleChange('fullName')}
+                    label={'Full Name (Optional)'}
                     onBlur={handleBlur('fullName')}
+                    onChangeText={handleChange('fullName')}
+                    error={touched.fullName && errors.fullName}
                   />
                   <CustomTextInput
                     value={phoneNumber}
-                    label={'Phone Number'}
-                    error={touched.phoneNumber && errors.phoneNumber}
+                    label={'Phone Number (Optional)'}
                     onBlur={handleBlur('phoneNumber')}
                     onChangeText={handleChange('phoneNumber')}
-                    d
+                    error={touched.phoneNumber && errors.phoneNumber}
                   />
                   <CustomTextInput
                     value={email}
                     label={'Email'}
-                    error={touched.email && errors.email}
                     onBlur={handleBlur('email')}
                     onChangeText={handleChange('email')}
+                    error={touched.email && errors.email}
                   />
                   <CustomTextInput
                     value={password}
                     label={'Password'}
-                    error={touched.password && errors.password}
+                    secureTextEntry={true}
                     onBlur={handleBlur('password')}
                     onChangeText={handleChange('password')}
-                    secureTextEntry={true}
+                    error={touched.password && errors.password}
                   />
                   <CustomTextInput
+                    secureTextEntry={true}
                     value={confirmPassword}
                     label={'Re-enter password'}
-                    error={touched.confirmPassword && errors.confirmPassword}
                     onBlur={handleBlur('confirmPassword')}
                     onChangeText={handleChange('confirmPassword')}
-                    secureTextEntry={true}
+                    error={touched.confirmPassword && errors.confirmPassword}
                   />
-                  {password != confirmPassword ? (
-                    <CustomGeneralButton
-                      name="Register"
-                      backgroundColor={COLORS.PRIMARY.DARK_GREY}
-                    />
-                  ) : (
-                    <TouchableOpacity
-                      onPress={() => onPressSignUp(email, password)}>
-                      <CustomGeneralButton
-                        name="Register"
-                        backgroundColor={COLORS.MAIN_PALETTE.BLURPLE}
-                      />
-                    </TouchableOpacity>
-                  )}
+                  <CustomGeneralButton
+                    name="Register"
+                    labelStyle={styles.label}
+                    buttonStyle={styles.button}
+                    backgroundColor={COLORS.MAIN_PALETTE.BLURPLE}
+                    onPress={() => onPressSignUp(email, password)}
+                  />
                 </>
               );
             }}
           </Formik>
         </View>
-        <Text style={[styles.text, {color: COLORS.PRIMARY.BLUE}]}>
-          {'View our privacy policy'}
-        </Text>
       </View>
     </SafeAreaView>
   );

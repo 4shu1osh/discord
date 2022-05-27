@@ -197,9 +197,11 @@ const signUpWithEmailAndPassword = (
   Auth()
     .createUserWithEmailAndPassword(email, password)
     .then(userData => {
-      successCallback(loginUser);
+      console.log("heloooooooooo")
+      successCallback(userData);
     })
     .catch(error => {
+      console.log("signup error--", error)
       failureCallback(authErrorHandling(error.code));
     });
 };
@@ -228,19 +230,16 @@ const authErrorHandling = errorMsg => {
   switch (errorMsg) {
     case 'auth/wrong-password':
       return 'Wrong email or password.';
-      break;
     case 'auth/network-request-failed':
       return 'Network request failed.';
-      break;
     case 'auth/invalid-email':
       return 'Invalid email.';
-      break;
     case 'auth/weak-password':
       return 'Weak password.';
-      break;
     case 'auth/no-current-user':
       return 'No user signed in';
-      break;
+    case 'auth/email-already-in-use':
+        return 'Email already exists.'
     default:
       break;
   }

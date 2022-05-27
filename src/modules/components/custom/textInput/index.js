@@ -1,7 +1,7 @@
 import React from 'react';
-import {TextInput, Text} from 'react-native-paper';
-import COLORS from '../../../../utils/colors';
 import styles from './styles';
+import COLORS from '../../../../utils/colors';
+import {TextInput, Text} from 'react-native-paper';
 
 
 export default function CustomTextInput(props) {

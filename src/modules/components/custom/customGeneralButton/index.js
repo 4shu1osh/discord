@@ -1,11 +1,12 @@
-import {View, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
-import styles from './styles';
+import {View, Text, TouchableOpacity} from 'react-native';
 
-export default function CustomGeneralButton({backgroundColor, name}) {
+export default function CustomGeneralButton(props) {
   return (
-      <View style={[styles.button, {backgroundColor}]}>
-        <Text style={styles.label}>{name}</Text>
+    <TouchableOpacity onPress={props.onPress}>
+      <View style={[props.buttonStyle, {backgroundColor: props.backgroundColor}]}>
+        <Text style={props.labelStyle}>{props.name}</Text>
       </View>
+    </TouchableOpacity>
   );
 }
